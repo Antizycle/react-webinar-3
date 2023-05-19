@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+dialog {
+  border: none;
+  border-radius: 10px;
+  padding: 0;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.66);
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.margin-inline-20 {
+  margin-inline: 20px;
+}

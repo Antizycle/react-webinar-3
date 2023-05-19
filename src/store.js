@@ -41,6 +41,51 @@ class Store {
   }
 
   /**
+   * Add item to the cart
+   * stores only unique entires in the state
+   * and adds new prop count
+   * 
+   * @param code
+   */  
+  addToCart(code) {
+    // find added item in the list
+    const newCart = [...this.state.cart];
+    const notUnique = newCart.some(item => {
+      if (item.code === code) {
+        item.count++;
+        return true;
+      }
+      return false;
+    });
+
+    const newCartItem = this.state.list.find(item => item.code === code);
+
+    if (newCartItem) {
+      if (!notUnique) {
+        newCartItem.count = 1;
+        newCart.push(newCartItem);
+      }
+
+      this.setState({
+        ...this.state,
+        cart: [...newCart]
+      })
+    }
+  };
+
+  /**
+   * Delete item from the cart by code
+   * @param code
+   */
+  deleteFromCart(code) {
+    this.setState({
+      ...this.state,
+      cart: this.state.cart.filter(item => item.code !== code)
+    })
+  };
+  
+
+  /**
    * Добавление новой записи
    */
   addItem() {
