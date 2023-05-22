@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import './style.css';
 import Head from "../head";
 import List from "../list";
-import { calcCartSum, calcCartTotalCount, thousSeparator } from "../../utils";
+import { thousSeparator } from "../../utils";
 import CartLayout from "../cart-layout";
+import CartItem from "../cart-item";
 
-function Cart({cartContent, showModal, closeCart, cartItemDelete}) {
+function Cart({cartContent, cartSummary, showModal, closeCart, cartItemDelete}) {
 
-  const itemCount = calcCartTotalCount(cartContent);
-  const total = calcCartSum(cartContent);
+  const itemCount = cartSummary.cartCount;
+  const total = cartSummary.cartSum;
 
   return (
     <CartLayout showModal={showModal}>
@@ -21,7 +22,7 @@ function Cart({cartContent, showModal, closeCart, cartItemDelete}) {
       <div className='Cart-spacer'>
         {!itemCount && 'В корзине пока ничего нет...'}
       </div>
-      <List list={cartContent} control='Удалить' handleControl={cartItemDelete}/>
+      <List list={cartContent} ItemComp={CartItem} handleControl={cartItemDelete}/>
       <div className='Cart-summary'>
         Итого: 
         <span>{thousSeparator(total)}&nbsp;&#8381;</span>
@@ -36,14 +37,25 @@ Cart.propTypes = {
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number,
-    count: PropTypes.number,
+    count: PropTypes.number
   })).isRequired,
+  cartSummary: PropTypes.shape({
+    cartCount: PropTypes.number,
+    cartUniqueCount: PropTypes.number,
+    cartSum: PropTypes.number
+  }),
   showModal: PropTypes.bool,
   closeCart: PropTypes.func,
   cartItemDelete: PropTypes.func
 };
 
 Cart.defaultProps = {
+  cartSummary: {
+    cartCount: 0,
+    cartUniqueCount: 0,
+    cartSum: 0
+  },
+  showModal: false,
   closeCart: () => {},
   cartItemDelete: () => {}
 }

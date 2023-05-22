@@ -18,15 +18,12 @@ function Item(props) {
       <div className='Item-title'>
         {props.item.title}
         <span className='Item-price'>
-          {thousSeparator(props.item.price * (props.item.count || 1))}&nbsp;&#8381;
+          {thousSeparator(props.item.price)}&nbsp;&#8381;
         </span>
-        {props.item.count && <span className='Item-count'>
-        {props.item.count} шт
-        </span>}
       </div>
       <div className='Item-actions'>
         <button onClick={callbacks.handleControl}>
-          {props.control}
+          Добавть
         </button>
       </div>
     </div>
@@ -39,7 +36,6 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number
   }).isRequired,
-  control: PropTypes.string,
   handleControl: PropTypes.func,
 };
 

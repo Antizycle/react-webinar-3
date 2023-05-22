@@ -5,6 +5,7 @@ import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Cart from "./components/cart";
 import './css/style.css';
+import Item from './components/item';
 
 /**
  * Приложение
@@ -16,6 +17,7 @@ function App({store}) {
 
   const list = store.getState().list;
   const cartContent = store.getState().cart;
+  const cartSummary = store.getState().cartSummary;
 
   const callbacks = {
     onAddToCart: useCallback((code) => {
@@ -35,10 +37,11 @@ function App({store}) {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls cartContent={cartContent} showCart={callbacks.onShowCart}/>
-      <List list={list} control='Добавить' handleControl={callbacks.onAddToCart}/>      
+      <Controls cartSummary={cartSummary} showCart={callbacks.onShowCart}/>
+      <List list={list} ItemComp={Item} handleControl={callbacks.onAddToCart}/>
       <Cart cartContent={cartContent} 
             showModal={cartVisible}
+            cartSummary={cartSummary}
             closeCart={callbacks.onCloseCart} 
             cartItemDelete={callbacks.onCartItemDelete}/>
     </PageLayout>

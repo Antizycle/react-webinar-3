@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Item from "../item";
 import './style.css';
 
-function List({list, control, handleControl}) {
+function List({list, ItemComp, handleControl}) {
   return (
     <div className='List'>{
       list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} control={control} handleControl={handleControl}/>
+          <ItemComp item={item} handleControl={handleControl}/>
         </div>
       )}
     </div>
@@ -19,12 +18,8 @@ List.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number
   })).isRequired,
-  control: PropTypes.string,
+  // ItemComp: PropTypes.node,
   handleControl: PropTypes.func
 };
-
-List.defaultProps = {
-  handleControl: () => {},
-}
 
 export default React.memo(List);
