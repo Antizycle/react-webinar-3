@@ -18,7 +18,6 @@ class Catalog extends StoreModule {
 
   async load(limit = 10, skip = 0) {
     const endpoint = `/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(_id, title, price),count`;
-    // const endpoint = '/api/v1/articles';
     const json = await fetch(endpoint).then(res => res.json());
 
     this.setState({
@@ -29,12 +28,10 @@ class Catalog extends StoreModule {
   }
 
   async loadOne(id) {
-    console.log('Do I even fetch?');
     if (id) {
-      console.log('Inside: Do I even fetch?');
       const endpoint = `/api/v1/articles/${id}`;
       const json = await fetch(endpoint).then(res => res.json());
-      console.log(json.result);
+      
       this.setState({
         ...this.getState(),
         productDetail: json.result

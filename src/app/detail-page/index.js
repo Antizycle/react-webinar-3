@@ -30,7 +30,7 @@ function DetailPage() {
 
   return (
     <PageLayout>
-      <Head title={ 'Название товара' && select.productDetail.title } />
+      <Head title={ select.productDetail.title } />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       { <ItemDetail item={select.productDetail} onAdd={callbacks.addToBasket} /> }

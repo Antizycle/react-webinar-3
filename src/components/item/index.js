@@ -2,10 +2,12 @@ import {memo} from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
+import useSelector from "../../store/use-selector";
 import {numberFormat} from "../../utils";
 import './style.css';
 
 function Item(props) {
+  const lPack = useSelector(state => state.lang.lPack);
 
   const cn = bem('Item');
 
@@ -23,7 +25,7 @@ function Item(props) {
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>{ lPack.addButton }</button>
       </div>
     </div>
   );

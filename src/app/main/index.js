@@ -22,7 +22,8 @@ function Main() {
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
-    total: state.catalog.total
+    total: state.catalog.total,
+    lPack: state.lang.lPack
   }));
 
   const callbacks = {
@@ -35,12 +36,12 @@ function Main() {
   const renders = {
     item: useCallback((item) => {
       return <Item item={item} onAdd={callbacks.addToBasket}/>
-    }, [callbacks.addToBasket])
+    }, [callbacks.addToBasket]),
   };
 
   return (
     <PageLayout>
-      <Head title='Магазин'/>
+      <Head title={ select.lPack.shopTitle }/>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
