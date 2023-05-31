@@ -25,6 +25,11 @@ class Lang extends StoreModule {
 
     }
   }
+
+  getPhrase(phraseGroup, phraseCode, phraseDefault) {
+    const phrase = this.getState().lPack[phraseGroup][phraseCode];
+    return phrase || phraseDefault;
+  }
 }
 
 export default Lang;

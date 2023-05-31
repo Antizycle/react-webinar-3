@@ -1,5 +1,4 @@
 import {memo, useCallback} from 'react';
-import useSelector from '../../store/use-selector';
 import useStore from '../../store/use-store';
 import PropTypes from 'prop-types';
 import './style.css';

@@ -17,8 +17,7 @@ function Pagination({ pages, page }) {
   }
   if (page > pages) page = 1;
 
-  // work out remaining kinks...
-  const selector = (el, ind) => {
+  const selectorElem = (el, ind) => {
     if (typeof el === 'string') return <div className='Pagination-spacer' key={ 'spc' + ind }>{ el }</div>
     if (el === page) return <div className='Pagination-selector--selected' key={ el }>{ el }</div>
     return <Link to={ `/${el}` } key={ el } className='Pagination-selector'>{ el }</Link>
@@ -26,7 +25,7 @@ function Pagination({ pages, page }) {
 
   return (
     <div className='Pagination'>
-      { (pages > 1) && range.map((el, ind) => selector(el, ind)) }
+      { (pages > 1) && range.map((el, ind) => selectorElem(el, ind)) }
     </div>
   );
 }

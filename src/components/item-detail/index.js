@@ -6,7 +6,7 @@ import './style.css';
 
 function ItemDetail(props) {
 
-  const lPack = useSelector(state => state.lang.lPack);
+  const gp = props.getPhrase;
 
   const callbacks = {
     onAdd: () => props.onAdd(props.item._id)
@@ -15,17 +15,18 @@ function ItemDetail(props) {
   return (
     <div className='Detail'>
       <p>{ props.item.description }</p>
-      <p>{ lPack.detail.origin }: <b>{ props.item.madeIn?._type }</b></p>
-      <p>{ lPack.detail.category }: <b>{ props.item.category?._type }</b></p>
-      <p>{ lPack.detail.issue }: <b>{ props.item.edition }</b></p>
+      <p>{ gp('detail', 'origin', 'Origin') }: <b>{ props.item.madeIn?._type }</b></p>
+      <p>{ gp('detail', 'category', 'Category') }: <b>{ props.item.category?._type }</b></p>
+      <p>{ gp('detail', 'issue', 'Issue') }: <b>{ props.item.edition }</b></p>
       <p className='Detail-price'>
-      { lPack.detail.price }: { numberFormat(props.item.price || 0) } ₽</p>
-      <button onClick={callbacks.onAdd}>{ lPack.addButton }</button>
+      { gp('detail', 'price', 'Price ') }: { numberFormat(props.item.price || 0) } ₽</p>
+      <button onClick={callbacks.onAdd}>{ gp('general', 'addButton', 'Add ') }</button>
     </div>
   );
 }
 
 ItemDetail.propTypes = {
+  getPhrase: PropTypes.func.isRequired,
   item: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,

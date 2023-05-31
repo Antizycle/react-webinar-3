@@ -23,18 +23,20 @@ function Basket() {
     removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store]),
     // Закрытие любой модалки
     closeModal: useCallback(() => store.actions.modals.close(), [store]),
+    getPhrase: useCallback((phraseGroup, phraseCode, phraseDefault) => 
+      store.actions.lang.getPhrase(phraseGroup, phraseCode, phraseDefault), [store]),
   }
 
   const renders = {
     itemBasket: useCallback((item) => {
-      return <ItemBasket item={item} onRemove={callbacks.removeFromBasket}/>
+      return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} getPhrase={ callbacks.getPhrase } />
     }, [callbacks.removeFromBasket]),
   };
 
   return (
-    <ModalLayout title={ lPack.cart.title } onClose={callbacks.closeModal}>
+    <ModalLayout title={ callbacks.getPhrase('cart', 'title', 'Cart') } onClose={callbacks.closeModal}>
       <List list={select.list} renderItem={renders.itemBasket}/>
-      <BasketTotal sum={select.sum}/>
+      <BasketTotal sum={select.sum} getPhrase={ callbacks.getPhrase } />
     </ModalLayout>
   );
 }
